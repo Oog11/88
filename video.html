@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Special Moments</title>
+    <style>
+        /* Modern CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Animated Background */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Button Animation */
+        @keyframes fadeInButton {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(-45deg, #a1c4fd, #c2e9fb, #e2d1c3, #a8edea);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .video-container {
+            width: 90%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        video {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            background: #000;
+        }
+
+        .next-button {
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 18px;
+            color: white;
+            background: linear-gradient(45deg, #4caf50, #45a049);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            display: none;
+        }
+
+        .next-button.visible {
+            display: block;
+            animation: fadeInButton 1s ease forwards;
+        }
+
+        .next-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        .next-button:active {
+            transform: translateY(0);
+        }
+
+        /* Loading indicator for video */
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 1.2em;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .video-container {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .next-button {
+                padding: 12px 30px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <video controls autoplay playsinline>
+            <source src="vanila.mp4" type="video/mp4">
+            Your browser doesn't support video playback.
+        </video>
+    </div>
+    <button class="next-button" onclick="window.location.href='letter.html'">Continue to Letter ❤️</button>
+
+    <script>
+        const video = document.querySelector('video');
+        const button = document.querySelector('.next-button');
+
+        // More robust timer function
+        function showButton() {
+            button.classList.add('visible');
+        }
+
+        // Show button after video ends or after 60 seconds
+        video.addEventListener('ended', showButton);
+        setTimeout(showButton, 60000);
+
+        // Handle video loading
+        video.addEventListener('loadstart', () => {
+            video.parentElement.insertAdjacentHTML('beforeend', 
+                '<div class="loading">Loading our special moments...</div>');
+        });
+
+        video.addEventListener('canplay', () => {
+            const loading = document.querySelector('.loading');
+            if (loading) loading.remove();
+        });
+
+        // Prevent accidental navigation
+        window.onbeforeunload = function() {
+            if (!video.ended) {
+                return "The video isn't finished yet. Are you sure you want to leave?";
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Letter</title>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes floatPaper {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(1deg); }
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(-45deg, #fbc2eb, #a6c1ee, #ff9a9e, #fad0c4);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .letter-container {
+            width: 100%;
+            max-width: 600px;
+            perspective: 1000px;
+        }
+
+        .letter {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform-style: preserve-3d;
+            animation: floatPaper 5s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .letter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+        }
+
+        .poem {
+            text-align: center;
+            line-height: 2;
+            margin: 20px 0;
+            animation: fadeIn 1.5s ease-out;
+            color: #444;
+            font-size: 1.1em;
+        }
+
+        .poem br {
+            margin-bottom: 0.5em;
+        }
+
+        .date {
+            text-align: right;
+            font-weight: 500;
+            margin-top: 30px;
+            color: #888;
+            font-size: 0.9em;
+            animation: fadeIn 2s ease-out;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .letter {
+                padding: 25px;
+            }
+
+            .poem {
+                font-size: 0.95em;
+                line-height: 1.8;
+            }
+        }
+
+        /* Hover effects */
+        .letter:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        /* Selection styling */
+        ::selection {
+            background: rgba(251, 194, 235, 0.4);
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="letter-container">
+        <div class="letter">
+            <p class="poem">
+                Үүлэн чөлөөний наран<br>
+                Үүрийн цолмонгоос үдшийн бүрий хүртэл<br>
+                Ганцхан чи мишээж үзэгдэх<br>
+                Тэвчээр тасарч тэсэлгүй тэмүүлээд очихуйц<br>
+                Тийм л тийм л үзэсгэлэн гоо нь үргэлж тодрох тийм л огторгуйд<br>
+                Амьсгал минь сонсогдох нам давалгаанд<br>
+                Ахиад ганц би ахиад ганц л<br>
+                Хүслээ би чамайг чамайг би хүсдэг<br>
+                Байгаагаараа өхөөрдөм төрхийг<br>
+                Тэнгис давалгаа шиг огцом аашийг нь ч бас<br>
+                Нарийхан бэлхүүсийг мөн адил ахиад ганц хэмээж би бурхнаас хүсдэг гуйлгачилж би бурхны гуйлгачин хийдэг<br>
+                Сайхан амрахыг нь л би хүсдэг.<br><br>
+                Аз жаргал бол түүний инээд, харин хайр бол түүнийг инээлгэсэн зүйл нь би байх.
+            </p>
+            <p class="date">2025/02/14 - 88th day.</p>
+        </div>
+    </div>
+</body>
+</html>
